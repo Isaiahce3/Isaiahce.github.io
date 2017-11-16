@@ -1,0 +1,99 @@
+<html>
+<head>
+<title> Pong </title> 
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script> 
+function start(){
+sjs.open();
+//Ball Object and Properties
+var ball = new sjs.Image("Images/planet.png");
+ball.type = "ball";
+ball.setSize(50,50);
+ball.center();
+ball.friction = 0;
+ball.bounce();
+ball.pushRight(6);
+ball.pushUp(6);
+// extara ball
+var ball2 = new sjs.Image("Images/planet.png")
+ball2.type = "ball";
+ball2.setSize(50,50);
+ball2.bottom().right();
+ball2.friction = 0;
+ball2.bounce();
+ball2.pushRight(6);
+ball2.pushUp(6);
+//extra ball
+var ball3 = new sjs.Image("Images/planet.png")
+ball3.type = "ball";
+ball3.setSize(50,50);
+ball3.bottom().left();
+ball3.friction = 0;
+ball3.bounce();
+ball3.pushRight(6);
+ball3.pushUp(6);
+//extra ball 
+var ball4 = new sjs.Image("Images/planet.png")
+ball4.type = "ball";
+ball4.setSize(50,50);
+ball4.top().left();
+ball4.friction = 0;
+ball4.bounce();
+ball4.pushRight(6);
+ball4.pushUp(6)
+//extar ball
+var ball5 = new sjs.Image("Images/planet.png")
+ball5.type = "ball";
+ball5.setSize(50,50);
+ball5.top().right();
+ball5.friction = 0;
+ball5.bounce();
+ball5.pushRight(6);
+ball5.pushUp(6)
+//extra ball
+var ball6 = new sjs.Image("Images/planet.png")
+ball6.type = "paddle";
+ball6.setSize(50,50);
+ball6.center().right();
+ball6.friction = 0;
+ball6.bounce();
+ball6.pushRight(6);
+ball6.pushUp(6)
+//exatra
+var ball7 = new sjs.Image("Images/planet.png")
+ball7.type = "ball";
+ball7.setSize(50,50);
+ball7.center().left();
+ball7.friction = 0;
+ball7.bounce();
+ball7.pushRight(6);
+ball7.pushUp(6)
+//Paddle 1
+var paddle1 = new sjs.Image("Images/paddle.png");
+paddle1.type = "paddle";
+paddle1.centerH();
+paddle1.setSize(300,20);
+//Paddle 2
+var paddle2 = new sjs.Image("Images/paddle2.png");
+paddle2.type = "paddle";
+paddle2.center().bottom();
+paddle2.setSize(300,20);
+ sjs.keyDown(LEFT_KEY, function(){
+paddle1.pushLeft();
+paddle2.pushLeft();
+});
+sjs.keyDown(RIGHT_KEY, function(){
+paddle1.pushRight();
+paddle2.pushRight();
+});
+sjs.onHit("ball","paddle", function(ball,paddle){
+sjs.bounceOff(ball,paddle,); 
+});
+} //end start
+</script> 
+</head> 
+<body onload="start()"> 
+<h1> Pong Game </h1> 
+<div id="target" style="margin:auto;background:grey;"></div> 
+</body> 
+</html>
