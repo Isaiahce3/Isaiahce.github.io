@@ -1,0 +1,66 @@
+<html> 
+	<head>
+		<link type="text/css" rel="stylesheet" href="main.css" />
+  		<title> Swim Help</title> 
+   		<script>
+   		function banner(){ 
+		var text = confirm("Did You Really Want to Click on My Banner?"); 
+		return text; 
+		}
+			function answer(){
+				var radio = document.getElementsByName("trivia");
+				var selection = false;
+				var message = ""; 
+				for( var i = 0; i < radio.length; i++) {
+				if(radio[i].value == "YES" && radio[i].checked == true) { 
+				selection = true; 
+				} //end if statement 
+				} //end for loop
+				if(selection == true) {
+				message = message + "<b><p style='color:green'>Thanks for the imformation</p></b>"; 
+				} else { 
+				message = message + "<b><p style='color:red'>You try making your own website.</p></b>"; 
+				}
+				document.getElementById("response").innerHTML = message;
+			} //end function
+		</script>
+	</head> 
+   
+
+	<body id="background"> 
+		<nav>
+			<ul>
+				
+				<li> <a href="index1.html"> <span class="games">PLAY MY GAME</span> </a> </li>
+			</ul>
+		</nav>
+		<h1>Need Help Swimming?<h1>
+		<p class="paragraph"> Need help swimming? Well you have come to the right place. Here we will give you some simple tips on how to improve your tecniques.
+		</p>
+		<ol>
+			<li class="listitem"> Longer push off time after your flip </li>
+			<header> Most of the time when you are flipping you blow out of your nose so water does not get in your nose. But actually, this is bad because it does not leave enough oxygen in your lungs to push off the wall and do three kicks before you need to breath. </header>
+			<li class="listitem"> Diving</li>
+			<header> When you  pull off the block do not look up. Instead look down at the water in stream line. <span class="bold">SEE VIDEO BELOW</span></header>
+			<li class="listitem"> Breathing tecniques</li>
+			<header> When you breathe during your butterfly, you should breathe at least every other stroke at the most. For freestyle, breathe every 3 strokes.</header> 
+		</ol> 
+		<div class="wrap-trivia"> 
+			<h2> HELP ME IMPROVE MY <span class="WB">WEBSITE</span>:</h2>
+			<p> Was this imformation helpful?</p>
+			<form>
+				<div id="response"></div>
+				<input type="radio" name="trivia" value="NO"> not at all<br> 
+				<input type="radio" name="trivia" value="YES"> sort of<br> 
+				<input type="radio" name="trivia" value="YES"> kind of<br> 
+				<input type="radio" name="trivia" value="YES"> totally<br>
+				<input type="button" id="submit" value="Click Here" onclick="answer()">
+			</form>
+		</div>
+		
+		<img src="https://thumbs.dreamstime.com/z/swimming-start-11945506.jpg" />
+		<iframe width="1300" height="650" src="https://www.youtube.com/embed/Z65Tr-nWoEs" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+		<hr>
+			Isaiah<a href="http://simplycodingcourses.com">My Favorite Website</a></center>
+	</body> 
+</html>
