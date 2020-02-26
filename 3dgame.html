@@ -26,6 +26,14 @@
 				function start() {
 				var canvas = document.getElementById('renderCanvas');
 				var engine = new BABYLON.Engine(canvas, true);
+				var keys = {};
+				window.addEventListener('keydown', function(e) {
+					keys[e.key] = true;
+				});
+
+				window.addEventListener('keyup', function(e) {
+					keys[e.key] = false;
+				});
 				var scene = new BABYLON.Scene(engine);
 				var gravityVector = new BABYLON.Vector3(0, -9.81, 0);
 				scene.enablePhysics(gravityVector, new BABYLON.CannonJSPlugin());
@@ -49,6 +57,36 @@
 
 				var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 				var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
+				scene.registerAfterRender(function() {
+				var vel = playerSphere.physicsImpostor.getLinearVelocity();
+				playerSphere.physicsImpostor.setLinearVelocity(vel.scale(.98));
+
+				var forward = camera.getFrontPosition(1).subtract(camera.position);
+				forward.y = 0;
+				forward = forward.normalize().scale(1);
+
+				var backward = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY(Math.PI));
+
+				var left = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY((3 * Math.PI) / 2));
+
+				var right = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY(Math.PI / 2));
+
+				if (keys.w) {
+				playerSphere.applyImpulse(forward, playerSphere.getAbsolutePosition());
+				}
+				if (keys.s) {
+				playerSphere.applyImpulse(backward, playerSphere.getAbsolutePosition());
+				}
+				if (keys.a) {
+				playerSphere.applyImpulse(left, playerSphere.getAbsolutePosition());
+				}
+				if (keys.d) {
+				playerSphere.applyImpulse(right, playerSphere.getAbsolutePosition());
+				}
+				if (playerSphere.position.y < -10) {
+				lost();
+				}
+				});
 
 				function drawPoint(x, z, zrot, scene) {
 					var point = BABYLON.MeshBuilder.CreateBox('point', {
@@ -71,6 +109,10 @@
 
 				engine.runRenderLoop(scene.render.bind(scene));
 				window.addEventListener('resize', engine.resize.bind(engine));
+				}
+				function lost(){
+				window.location.reload();
+				alert("you lose!");
 				}
 			</script>
 			</head>
