@@ -52,6 +52,10 @@ var _yFn = function(t) {var fns = [function(t) {return (Math.pow((1-t),3)*0.4128
 				playerSphere.material = new BABYLON.StandardMaterial("playerSphereMaterial", scene);
 				playerSphere.material.diffuseTexture = new BABYLON.Texture('resources/BeachBallColor.jpg', scene);
 				playerSphere.position = new BABYLON.Vector3(xFn(0), 9, zFn(0));
+				playerSphere.physicsImpostor = new BABYLON.PhysicsImpostor(playerSphere, BABYLON.PhysicsImpostor.SphereImpostor, {
+				      mass: 1,
+				      restitution: 0.9
+				  }, scene);
 
 				var camera = new BABYLON.ArcRotateCamera("Camera", 0, (3 * Math.PI) / 8, 20, playerSphere, scene);
 				camera.attachControl(canvas, true);
