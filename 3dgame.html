@@ -65,6 +65,8 @@ var _yFn = function(t) {var fns = [function(t) {return (Math.pow((1-t),3)*0.0878
 				var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 				var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 				rampAt(xFn, zFn, 0.925, -Math.PI / 4, scene);
+				wallAt(xFn, zFn, 0.925, -6.1, scene);
+				wallAt(xFn, zFn, 0.925, 6.1, scene);
 				scene.registerAfterRender(function() {
 				var vel = playerSphere.physicsImpostor.getLinearVelocity();
 				playerSphere.physicsImpostor.setLinearVelocity(vel.scale(.98));
@@ -164,6 +166,23 @@ win();
 				ramp.rotation.y = -derivAngle(t, xFn, zFn);
 				}
 
+				function wallAt(xFn, zFn, t, offset, scene) {
+				var wall = BABYLON.MeshBuilder.CreateBox('wall', {
+				height: 24,
+				width: .25,
+				depth: 12
+				}, scene);
+				angle = -derivAngle(t, xFn, zFn);
+				wall.material = new BABYLON.StandardMaterial("wallMaterial", scene);
+				wall.material.diffuseColor = new BABYLON.Color3(1, 1, 0);
+				wall.physicsImpostor = new BABYLON.PhysicsImpostor(wall, BABYLON.PhysicsImpostor.BoxImpostor, {
+				mass: 0,
+				restitution: 0.9
+				}, scene);
+				wall.position = new BABYLON.Vector3(xFn(t) + (offset * Math.sin(angle)), 4, zFn(t) + (offset * Math.cos(angle)));
+				wall.rotation.y = angle + (Math.PI / 2);
+				return wall;
+				}
 				engine.runRenderLoop(scene.render.bind(scene));
 				window.addEventListener('resize', engine.resize.bind(engine));
 				}
