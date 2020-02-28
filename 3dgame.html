@@ -94,9 +94,11 @@ var _yFn = function(t) {var fns = [function(t) {return (Math.pow((1-t),3)*0.0878
 
 				var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 				var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
-				rampAt(xFn, zFn, 0.925, -Math.PI / 4, scene);
-				wallAt(xFn, zFn, 0.925, -6.1, scene);
-				wallAt(xFn, zFn, 0.925, 6.1, scene);
+				rampAt(xFn, zFn, 0.924, -Math.PI / 4, scene);
+				wallAt(xFn, zFn, 0.924, -6.1, scene);
+				wallAt(xFn, zFn, 0.924, 6.1, scene);
+				wallAt(xFn, zFn, 0.923, -6.1, scene);
+				wallAt(xFn, zFn, 0.923, 6.1, scene);
 				scene.registerAfterRender(function() {
 				var vel = playerSphere.physicsImpostor.getLinearVelocity();
 				playerSphere.physicsImpostor.setLinearVelocity(vel.scale(.98));
